@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let player2 = "O";
   let turn=1;
   let gamearr=[ [0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7], [2,5,8], [0,4,8], [2,4,6] ];
+  const butn = document.querySelector(".btn");
+  const stat = document.getElementById("status");
 
   const squares = document.querySelectorAll("#board > div");
   squares.forEach((square) => square.classList.add("square"));
@@ -41,18 +43,26 @@ document.addEventListener("DOMContentLoaded", function () {
       const [a,b,c] = combo;
       if ((squares[a].classList.contains(player1))&&(squares[b].classList.contains(player1))&&
       (squares[c].classList.contains(player1))){
-        document.getElementById("status").innerHTML = "Congratulations! X is the Winner!";
-        document.getElementById("status").classList.add("you-won");
+        stat.innerHTML = "Congratulations! X is the Winner!";
+        stat.classList.add("you-won");
       }
       else if ((squares[a].classList.contains(player2))&&(squares[b].classList.contains(player2))&&
       (squares[c].classList.contains(player2))){
-        document.getElementById("status").innerHTML = "Congratulations! O is the Winner!";
-        document.getElementById("status").classList.add("you-won");
+        stat.innerHTML = "Congratulations! O is the Winner!";
+        stat.classList.add("you-won");
       }
     }
   }
 
-
+  butn.addEventListener("click", function(){
+    squares.forEach((square) => {
+      square.innerHTML="";
+      square.classList.remove("X", "O");
+      turn=1;
+      stat.innerHTML="Move your mouse over a square and click to play an X or an O.";
+      stat.classList.remove("you-won");
+    })
+  })
 
 
 
